@@ -10,7 +10,11 @@ import "./styles.scss";
 
 const App = () => {
   const [coinData, setCoinData] = useState([]);
-  const [darkMode, toggleMode] = useToggle("darkMode", false);
+  const [darkMode, toggleMode, mutation] = useToggle(
+    "darkMode",
+    false,
+    "dark-mode"
+  );
   useEffect(() => {
     axios
       .get(
@@ -20,9 +24,9 @@ const App = () => {
       .catch(err => console.log(err));
   }, []);
   return (
-    <div className="App">
-      <Navbar darkMode={darkMode} toggleMode={toggleMode} />
-      <Charts coinData={coinData} darkMode={darkMode} />
+    <div className={mutation("App")}>
+      <Navbar darkMode={darkMode} toggleMode={toggleMode} mutation={mutation} />
+      <Charts coinData={coinData} darkMode={darkMode} mutation={mutation} />
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React from "react";
 // import useToggle from "../hooks/useToggle";
 
-const Navbar = ({ darkMode, toggleMode }) => {
+const Navbar = ({ darkMode, toggleMode, mutation }) => {
   // const [darkMode, toggleMode] = useToggle("darkMode", false);
   // const [darkMode, setDarkMode] = useState(false);
   // const toggleMode = e => {
@@ -9,12 +9,12 @@ const Navbar = ({ darkMode, toggleMode }) => {
   //   setDarkMode(!darkMode);
   // };
   return (
-    <nav className={darkMode ? "navbar dark-mode" : "navbar"}>
+    <nav className={mutation("navbar")}>
       <h1>Crypto Tracker</h1>
       <div className="dark-mode__toggle">
         <div
           onClick={toggleMode}
-          className={darkMode ? "toggle toggled dark-mode" : "toggle"}
+          className={darkMode ? mutation("toggle toggled") : "toggle"}
         />
       </div>
     </nav>

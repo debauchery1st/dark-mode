@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const useToggle = (key, initVal) => {
+const useToggle = (key, initVal, mutation) => {
   const [toggleValue, setToggleValue] = useState({ [key]: initVal });
   const toggle = toggleValue[key];
   const flip = e => {
@@ -8,7 +8,11 @@ const useToggle = (key, initVal) => {
     const newValue = { [key]: !toggle };
     setToggleValue(newValue);
   };
-  return [toggle, flip];
+  return [
+    toggle,
+    flip,
+    htmlClassName => (!toggle ? htmlClassName : `${htmlClassName} ${mutation}`)
+  ];
 };
 
 export default useToggle;
