@@ -4,12 +4,13 @@ import axios from "axios";
 
 import Charts from "./components/Charts";
 import Navbar from "./components/Navbar";
+import useToggle from "./hooks/useToggle";
 
 import "./styles.scss";
 
 const App = () => {
   const [coinData, setCoinData] = useState([]);
-
+  const [darkMode, toggleMode] = useToggle("darkMode", false);
   useEffect(() => {
     axios
       .get(
@@ -20,8 +21,8 @@ const App = () => {
   }, []);
   return (
     <div className="App">
-      <Navbar />
-      <Charts coinData={coinData} />
+      <Navbar darkMode={darkMode} toggleMode={toggleMode} />
+      <Charts coinData={coinData} darkMode={darkMode} />
     </div>
   );
 };
