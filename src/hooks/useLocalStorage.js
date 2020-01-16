@@ -2,8 +2,9 @@ import { useState } from "react";
 
 const useLocalStorage = (key, initVal) => {
   const store = window.localStorage;
+  const stored = JSON.parse(store.getItem(key));
   const [localState, setLocalState] = useState({
-    [key]: JSON.parse(store.getItem(key)) || initVal
+    [key]: stored.darkMode || initVal
   });
   const setValue = value => {
     setLocalState(value); // state
