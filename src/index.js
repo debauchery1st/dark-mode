@@ -5,11 +5,21 @@ import axios from "axios";
 import Charts from "./components/Charts";
 import Navbar from "./components/Navbar";
 
+import useToggle from "./hooks/useToggle";
+import useLocalStorage from "./hooks/useLocalStorage";
+
 import "./styles.scss";
 
 const App = () => {
   const [coinData, setCoinData] = useState([]);
-
+  const [readCookie, writeCookie] = useLocalStorage("darkMode");
+  const localStore = { read: readCookie, write: writeCookie };
+  const [darkMode, toggleMode, mutation] = useToggle(
+    "darkMode",
+    false,
+    "dark-mode",
+    localStore
+  );
   useEffect(() => {
     axios
       .get(
@@ -19,9 +29,9 @@ const App = () => {
       .catch(err => console.log(err));
   }, []);
   return (
-    <div className="App">
-      <Navbar />
-      <Charts coinData={coinData} />
+    <div className={mutation("App")}>
+      <Navbar darkMode={darkMode} toggleMode={toggleMode} mutation={mutation} />
+      <Charts coinData={coinData} darkMode={darkMode} mutation={mutation} />
     </div>
   );
 };

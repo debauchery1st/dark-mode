@@ -1,18 +1,20 @@
-import React, { useState } from 'react';
+import React from "react";
+// import useToggle from "../hooks/useToggle";
 
-const Navbar = () => {
-  const [darkMode, setDarkMode] = useState(false);
-  const toggleMode = e => {
-    e.preventDefault();
-    setDarkMode(!darkMode);
-  };
+const Navbar = ({ darkMode, toggleMode, mutation }) => {
+  // const [darkMode, toggleMode] = useToggle("darkMode", false);
+  // const [darkMode, setDarkMode] = useState(false);
+  // const toggleMode = e => {
+  //   e.preventDefault(); // ? is this necessary?
+  //   setDarkMode(!darkMode);
+  // };
   return (
-    <nav className="navbar">
+    <nav className={mutation("navbar")}>
       <h1>Crypto Tracker</h1>
       <div className="dark-mode__toggle">
         <div
           onClick={toggleMode}
-          className={darkMode ? 'toggle toggled' : 'toggle'}
+          className={darkMode ? mutation("toggle toggled") : "toggle"}
         />
       </div>
     </nav>
